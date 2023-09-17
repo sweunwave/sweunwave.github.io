@@ -165,6 +165,7 @@
             {% assign category_posts = site.posts | where: "categories", category[0] %}
             <li>
               <a href="{{ site.url }}/categories/{{ category[0] | slugize }}/">
+              <!-- <a href="{{ site.url }}/categories/{{ category[0] | slugize }}" ></a> -->
                 {{ category[0] }} ({{ category_posts.size }})
               </a>
             </li>
