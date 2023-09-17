@@ -158,6 +158,19 @@
           </label>
         </p>
       </div>
+      <div class="categories">
+        <h2>Categories</h2>
+        <ul>
+          {% for category in site.categories %}
+            {% assign category_posts = site.posts | where: "categories", category[0] %}
+            <li>
+              <a href="{{ site.baseurl }}/categories/{{ category[0] | slugize }}/">
+                {{ category[0] }} ({{ category_posts.size }})
+              </a>
+            </li>
+          {% endfor %}
+        </ul>
+      </div>
       {%- endif -%}
       {% endcapture %}
       {{ footer }}

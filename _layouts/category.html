@@ -1,0 +1,20 @@
+---
+layout: default
+---
+<ul class="posts-category-list">
+  
+  {% assign category = page.category | default: page.title %}
+  {% for post in site.categories[category] %}
+    <li>
+      <h2 class="post-title">{{ category }}</h2>
+      <hr width = "70%" size = "2" align="left">
+      <h3>
+        <a href="{{ site.baseurl }}{{ post.url }}">
+          {{ post.title }}
+        </a>
+        <small>{{ post.date | date_to_string }}</small>
+      </h3>
+    </li>
+  {% endfor %}
+  
+</ul>

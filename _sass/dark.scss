@@ -14,14 +14,24 @@
 			display: inline;
 		}
 	}
+	.categories h2{
+		color: $dark_text_color;
+	}
+	.categories ul li a{
+		color: $dark_text_color;
+	}
+	.posts-category-list li h3 a{
+		color: $dark_text_color;
+	}
+	// .post-categories{
+	// 	color: #ddd;
+	// }
 	.post p {
 		color: #ddd;
 	}
-
 	.social [class^="icon-"] {
 		color: $dark_text_color
 	}
-
 	#posts-label {
 		color: $dark_text_color;
 		border-bottom: 1px solid #272727;
