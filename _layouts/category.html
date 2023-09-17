@@ -2,12 +2,12 @@
 layout: default
 ---
 <ul class="posts-category-list">
-  
+  <h1 class="page-heading">{{ page.title }}</h1>
+  <h2 class="post-title">{{ category }}</h2>
+  <hr width = "70%" size = "2" align="left">
   {% assign category = page.category | default: page.title %}
   {% for post in site.categories[category] %}
     <li>
-      <h2 class="post-title">{{ category }}</h2>
-      <hr width = "70%" size = "2" align="left">
       <h3>
         <a href="{{ site.baseurl }}{{ post.url }}">
           {{ post.title }}

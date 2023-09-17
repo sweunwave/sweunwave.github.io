@@ -9,10 +9,10 @@ RTK 신호를 통해 정밀한 측위 정보를 제공받고 LLA to UTM 으로 �
 u-center를 사용하여 수신 주기 조절
 
 ### 개발환경
->** Ubuntu 18.04 LTS / ROS Melodic**
+> Ubuntu 18.04 LTS / ROS Melodic
 
 ### 사용장비
-> ** Ublox C099 - F9P **
+> Ublox C099 - F9P
 
 ![](https://velog.velcdn.com/images/swooeun/post/215008b2-d57a-4eea-9a18-71a18469fe7e/image.png)
 
