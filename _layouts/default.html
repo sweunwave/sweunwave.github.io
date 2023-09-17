@@ -164,7 +164,7 @@
           {% for category in site.categories %}
             {% assign category_posts = site.posts | where: "categories", category[0] %}
             <li>
-              <a href="https://sweunwave.github.io/categories/{{ category[0] | slugize }}/">
+              <a href="{{ site.url }}{{ site.baseurl }}/categories/{{ category[0] | slugize }}/">
                 {{ category[0] }} ({{ category_posts.size }})
               </a>
             </li>
