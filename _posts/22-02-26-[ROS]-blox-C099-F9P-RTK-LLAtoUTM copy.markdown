@@ -9,10 +9,10 @@ RTK 신호를 통해 정밀한 측위 정보를 제공받고 LLA to UTM 으로 �
 u-center를 사용하여 수신 주기 조절
 
 ### 개발환경
->> Ubuntu 18.04 LTS / ROS Melodic
+* Ubuntu 18.04 LTS / ROS Melodic
 
 ### 사용장비
->> Ublox C099 - F9P
+* Ublox C099 - F9P
 
 ![](https://velog.velcdn.com/images/swooeun/post/215008b2-d57a-4eea-9a18-71a18469fe7e/image.png)
 
@@ -28,7 +28,7 @@ u-center를 사용하여 수신 주기 조절
 
 ### 드라이버 설치
 ROS 에서 사용해주기 위해 드라이버를 설치
-> https://github.com/ros-agriculture/ublox_f9p.git
+* <https://github.com/ros-agriculture/ublox_f9p.git>
 
 ```
 $ cd catkin_ws/src
@@ -74,7 +74,7 @@ $ catkin_make
 $ roslaunch ublox_gps ublox_device.launch
 ```
 
-`$ rostopic list -v` 를 통해 현재 토픽을 확인할 수 있다.
+*$ rostopic list -v* 를 통해 현재 토픽을 확인할 수 있다.
 ```
 Published topics:
  * /ublox_gps/navrelposned [ublox_msgs/NavRELPOSNED] 1 publisher
@@ -95,7 +95,7 @@ Subscribed topics:
 
 ```
 
-`$ rostopic echo /ublox_gps/fix` 로 내용을 확인해보자.
+*$ rostopic echo /ublox_gps/fix* 로 내용을 확인해보자.
 ```
 ---
 header: 
@@ -124,17 +124,18 @@ position_covariance_type: 2
 정밀 측위를 위해 RTK 신호를 사용해보자. 
 RTK 신호를 통해 근처 기지국으로부터의 보정 신호로 정밀한 측위 정보를 얻을 수 있다.
 대략적인 과정은 아래와 같다.
-> 1. 수신기와 근처 기지국은 각각 GPS 신호를 수신한다.
+
+1. 수신기와 근처 기지국은 각각 GPS 신호를 수신한다.
 2. 기지국은 자신의 정확한 위치정보를 알고있으므로 수신된 정보와의 오차를 비교할 수 있다.
 3. 수신기는 전달받은 오차 정보를 통해 자신의 위치를 보정할 수 있다.
 
 국토지리정보원에 가입하여 VRS 를 받을 수 있으니 아래 링크를 참고
-> http://koseco.co.kr/ngii_rtk/
+* <http://koseco.co.kr/ngii_rtk/>
 
 
 ### RTCM, NTRIP 패키지 설치
 우선 기지국으로부터 보정신호를 받아오기 위해 RTCM 패키지를 설치해준다.
-> https://github.com/tilk/rtcm_msgs.git
+* <https://github.com/tilk/rtcm_msgs.git>
 
 ```
 $ cd ~/catkin_ws/src/ublox_f9p/
@@ -143,7 +144,7 @@ $ git clone https://github.com/tilk/rtcm_msgs.git
 
 다음은 NTRIP 패키지를 설치하고 빌드 해준다.
 
-> https://github.com/ros-agriculture/ntrip_ros
+* <https://github.com/ros-agriculture/ntrip_ros>
 
 ```
 $ git clone https://github.com/ros-agriculture/ntrip_ros
@@ -224,7 +225,7 @@ position_covariance_type: 2
 자세한 u-center 사용법은 추후 업로드 예정
 
 우선 ublox 사의 소프트웨어 u-center 를 설치
-> https://www.u-blox.com/en/product/u-center
+* <https://www.u-blox.com/en/product/u-center>
 
 실행 후 GPS를 연결한다.
 
@@ -253,7 +254,7 @@ x, y, z 로 표현되는 UTM 좌표계로 변경해보자.
 
 ### LLAtoUTM 패키지 설치
 아래의 패키지를 설치한다.
-> https://github.com/arpg/ROS-UTM-LLA.git
+* <https://github.com/arpg/ROS-UTM-LLA.git>
 
 ```
 $ cd ~/catkin_ws/src/ublox_f9p/
