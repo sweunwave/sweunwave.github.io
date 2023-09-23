@@ -74,7 +74,7 @@ $ catkin_make
 $ roslaunch ublox_gps ublox_device.launch
 ```
 
-`$ rostopic list -v` 를 통해 현재 토픽을 확인할 수 있다.
+*$ rostopic list -v* 를 통해 현재 토픽을 확인할 수 있다.
 ```
 Published topics:
  * /ublox_gps/navrelposned [ublox_msgs/NavRELPOSNED] 1 publisher
@@ -95,7 +95,7 @@ Subscribed topics:
 
 ```
 
-`$ rostopic echo /ublox_gps/fix` 로 내용을 확인해보자.
+*$ rostopic echo /ublox_gps/fix* 로 내용을 확인해보자.
 ```
 ---
 header: 
@@ -124,7 +124,12 @@ position_covariance_type: 2
 정밀 측위를 위해 RTK 신호를 사용해보자. 
 RTK 신호를 통해 근처 기지국으로부터의 보정 신호로 정밀한 측위 정보를 얻을 수 있다.
 대략적인 과정은 아래와 같다.
+<<<<<<< HEAD
 * 1. 수신기와 근처 기지국은 각각 GPS 신호를 수신한다.
+=======
+
+1. 수신기와 근처 기지국은 각각 GPS 신호를 수신한다.
+>>>>>>> 8f8ee86dbf50f1ab46bb20aa2215d86548be0dbf
 2. 기지국은 자신의 정확한 위치정보를 알고있으므로 수신된 정보와의 오차를 비교할 수 있다.
 3. 수신기는 전달받은 오차 정보를 통해 자신의 위치를 보정할 수 있다.
 
