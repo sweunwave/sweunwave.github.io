@@ -1,6 +1,5 @@
 ---
 layout: category
-permalink : /categories/ROS/
 title: ROS
-permalink : /categories/Python/
+permalink : /categories/ROS/
 ---
