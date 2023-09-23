@@ -1,0 +1,45 @@
+---
+layout: post
+title:  "전처리기의 사용"
+date:   2023-02-19 21:03:36 +0530
+categories: Cpp
+---
+전처리기는 빌드를 시작하기 전에 처리되며, 빌드를 시작하며 결정되는 값이다.
+
+이 프로그램이 빌드를 시작하기 전, 
+
+윈도우인지 리눅스인지
+그래픽카드 사양은 어떤지와 같은 내용이 예가된다.
+
+멀티플랫폼을 개발하게 될 때는 아주 많이 사용하게 됨.
+
+define은 현재 정의된 파일 안에서만 유효하다.
+
+* ```#define //정의```
+* ```#ifdef //정의가 되어있다면```
+* ```#ifndef //정의가 되어있지않다면```
+* ```#endif```
+* ```#else```
+
+```cpp
+#include <iostream>
+
+#define APPLE
+
+using namespace std;
+
+int main() {
+	
+	#ifdef APPLE
+		cout << "Apple" << endl;
+	#endif
+
+	return 0;
+}
+
+```
+
+![](https://velog.velcdn.com/images/swooeun/post/fa5d6c09-7a94-4668-b9b6-d63713316cf5/image.png)
+
+
+

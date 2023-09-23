@@ -1,0 +1,12 @@
+---
+layout: post
+title:  "numpy 자료형"
+date:   2022-11-25 21:03:36 +0530
+categories: Python Numpy
+---
+
+![](https://velog.velcdn.com/images/swooeun/post/448c2676-0612-4b58-9d68-bd24db0c516c/image.png)
+
+---
+## 참고자료
+* [이수안컴퓨터연구소 - Numpy 한번에 끝내기](https://youtu.be/mirZPrWwvao)

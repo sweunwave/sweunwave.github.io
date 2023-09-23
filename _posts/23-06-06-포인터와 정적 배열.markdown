@@ -1,0 +1,117 @@
+---
+layout: post
+title:  "포인터와 정적 배열"
+date:   2023-06-06 21:03:36 +0530
+categories: C Cpp
+---
+포인터에서 정적 배열을 사용하는 것과 구조체 안에 정적 배열을 넣어서 사용하는 것에 대해 작성
+
+두 경우가 어떻게 다른지 비교해보자.
+
+```cpp
+#include<iostream>
+
+using namespace std;
+
+struct MyStruct
+{
+    int array[5] = { 0, 1, 2, 3, 4 };
+};
+
+void doSomgthing_struct(MyStruct ms){
+    cout << "struct in doSomething : " << sizeof(ms.array) << endl;
+}
+
+void doSomgthing_array(int array[]){
+    cout << "arr in doSomething : " << sizeof(array) << endl;
+}
+
+
+int main(){
+    int arr[5] = { 6, 7, 8, 9, 10 };
+
+    MyStruct ms;
+    cout << "struct in main : " << sizeof(ms.array) << endl;
+    cout << "array in main : " << sizeof(arr) << endl; // 포인터 변수의 주소값의 크기가 출력됨 
+
+    doSomgthing_struct(ms);
+    doSomgthing_array(arr);
+
+    return 0;
+}
+```
+
+```
+출력결과
+struct in main : 20
+array in main : 20
+struct in doSomething : 20
+arr in doSomething : 8
+```
+결과를 보면 구조체 안의 배열 사이즈는 함수와 메인에서 동일하지만,
+그냥 선언된 정적 배열은 사이즈가 다르다.
+
+왜일까?
+
+**배열의 경우, 함수에 사용될 때 포인터로 사용되기 때문.**
+
+정적 배열같은 경우, 함수에 입력으로 사용되면 포인터로 적용된다.
+즉, 배열의 첫번째값의 주소가 넘어간다.
+그래서 주소값을 저장하는 포인터 변수의 크기인 8이 출력되는 것. (32비트의 경우 4)
+
+그럼 배열의 값을 바꿔보면 어떻게 될까.
+
+```cpp
+#include<iostream>
+
+using namespace std;
+
+struct MyStruct
+{
+    int array[5] = { 0, 1, 2, 3, 4 };
+};
+
+void doSomgthing_struct(MyStruct ms){
+    ms.array[0] = 100;
+    cout << "struct in doSomething : " << ms.array[0] << endl;
+
+}
+
+void doSomgthing_array(int array[]){
+    array[0] = 100;
+    cout << "array in doSomething : " << array[0] << endl;
+}
+
+
+int main(){
+
+    int arr[5] = { 6, 7, 8, 9, 10 };
+
+    MyStruct ms;
+    cout << "struct in main : " << ms.array[0] << endl;
+    cout << "array in main : " << arr[0] << endl; 
+
+    doSomgthing_struct(ms);
+    doSomgthing_array(arr);
+
+    cout << "struct in main after doSomething : " << ms.array[0] << endl;
+    cout << "array in main after doSomething : " << arr[0] << endl;
+
+    return 0;
+}
+```
+
+```
+출력결과
+struct in main : 0
+array in main : 6
+struct in doSomething : 100
+array in doSomething : 100
+struct in main after doSomething : 0
+array in main after doSomething : 100
+```
+
+메인에서 선언된 정적 배열의 경우, 포인터로 입력되므로 함수 동작이 끝난 뒤에도 값이 변경되지만, 구조체로 전달된 배열은 값이 변하지 않았음.
+
+---
+위 작성된 내용은 미흡한 점이 많을 수 있습니다.

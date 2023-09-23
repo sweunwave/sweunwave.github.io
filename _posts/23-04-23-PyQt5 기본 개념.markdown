@@ -1,0 +1,29 @@
+---
+layout: post
+title:  "PyQt5 기본 개념"
+date:   2023-04-23 21:03:36 +0530
+categories: Python PyQt5
+---
+### QWidget
+QWidget을 딱 한마디로 설명하면 버튼, input 위젯 같은 다양한 위젯들을 올려놓을 수 있는 사각형의 영역
+즉, 그림을 그릴 수 있는 도화지 같은 것, Main Window와 다르게 상단의 메뉴창과 하단의 상태창을 추가할 수 없음
+
+### QMainWindow
+QMainWindow는 최상위 위젯으로 메뉴바, 도구 모음, 상태바등이 포함된 미리 정의된 레이아웃을 가지고 있음
+qt designer의 객체 탐색기를 살펴보면 QMainWindow라는 상위 클래스에 QWidget이 속해 있음
+즉, MainWindow를 도화지를 담고 있는 프레임으로 생각
+
+### QDialog
+항상 별도의 창에 표시되는 대화상자로, 주로 우리가 흔히 보는 팝업창이나 경고창 역할을 주로 함
+기본 템플릿에서 버튼을 제공하는 것이 있는데, 주로 사용자가 간단히 확인, 취소 버튼을 누를 때 사용하기 때문
+
+### 4. Modal, Modeless 개념
+#### 1) Modal
+- 새롭게 Modal 속성을 가진 창이 열렸을 경우 기존에 있던 창을 사용하지 못하는 '제어권 독점' 방식
+#### 2) Modeless
+- 어느 하나의 Dialog 창이 있어도 프로그램 제어권을 독점하지 않으므로 다른 작업이 가능
+- show()의 실행 형식으로 독립적이지 않음
+
+
+---
+참고 : [[Python/Pyqt5] QWidget, QMainWindow, Qdialog 차이 총정리 (ft. Modal과 Modeless)](https://coding-kindergarten.tistory.com/171)

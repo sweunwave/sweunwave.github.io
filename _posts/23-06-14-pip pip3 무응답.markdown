@@ -1,0 +1,9 @@
+---
+layout: post
+title:  "pip pip3 무응답"
+date:   2023-06-14 21:03:36 +0530
+categories: Python
+---
+```
+unset DISPLAY
+```

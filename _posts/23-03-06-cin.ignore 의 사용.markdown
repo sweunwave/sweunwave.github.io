@@ -1,0 +1,35 @@
+---
+layout: post
+title:  "cin.ignore 의 사용"
+date:   2023-03-06 21:03:36 +0530
+categories: Cpp
+---
+cpp 코드를 짤 때, 정수형과 문자형의 입력을 동시에 받아야하는 경우는 다음과 같이 코드를 짠다
+
+```cpp
+#include <iostream>
+#include <string>
+#include <limits>
+
+int main() {
+	
+	using namespace std;
+	string my_name;
+	int my_age;
+
+	cout << "typing your age (int) : ";
+	cin >> my_age;
+
+	//앞에 입력 받고 남은 버퍼를 날려버림
+	std::cin.ignore(32767, '\n');
+	// or 
+	//std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+
+	cout << "typing your name : ";
+	std::getline(std::cin, my_name);
+
+	cout << my_name << " " << my_age << endl;
+
+	return 0;
+}
+```

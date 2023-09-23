@@ -1,0 +1,18 @@
+---
+layout: post
+title:  "conda 초기세팅"
+date:   2023-01-03 21:03:36 +0530
+categories: Anaconda3
+---
+
+본 글은 anaconda3 설치 후 시스템 환경 변수 초기 세팅법에 대해 설명
+
+#### 시스템 환경 변수 추가
+![](https://velog.velcdn.com/images/swooeun/post/f503310a-ec58-4934-bd88-7ee57fcbd1ff/image.png)
+
+```
+C:\Users\user\anaconda3
+C:\Users\user\anaconda3\Library
+C:\Users\user\anaconda3\Scripts
+C:\Users\user\Anaconda3\Library\bin
+```
