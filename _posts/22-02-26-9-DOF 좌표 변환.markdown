@@ -1,0 +1,105 @@
+---
+layout: post
+title:  "9-DOF 좌표 변환 [frame : sensor to world]"
+date:   2023-12-14 14:27:36 +0530
+categories: Kinematics Python
+---
+자세 정보 roll, pitch, yaw
+위치 정보 x, y, z 를 반영한 9-DOF 좌표 변환 방법
+
+### Overview
+
+자율주행 센서에서 sensor(ex LiDAR) 기준으로 생성된 3차원 Boungding Box 정보를 world의 좌표로 옮기는 방법에 대해서 설명한다.
+
+### Coordinate Frame
+
+* Frame 기준
+    * 자율주행 모빌리티 -> World(맵) 좌표계 상의 위치
+    * 자율주행 센서 -> Ego(차량) 좌표계 상의 위치
+    * 자율주행 센서 데이터 -> 센서 좌표계 상의 위치 (ex LiDAR)
+
+따라서, 센서 데이터를 맵 상에 표현하기 위해서는
+
+**world 에서 바라본 ego * ego에서 바라본 sensor * sensor에서 바라본 어떤 지점의 위치(각도)**
+
+의 연산이 필요하다.
+
+변환 할 bbox 정보  
+xyz : 4.333 20.601 -0.122  
+roll pitch yaw : 0.01787 0.0410 -1.5432 (deg)
+
+## 1. world to ego transform
+world 상에서 차량의 위치, 자세정보로 rotation matrix를 생성한다.
+
+```python
+from scipy.spatial.transform import Rotation as R
+import numpy as np
+
+car_position = np.array([1096.405, -1490.759, -19.48306]) # xyz
+car_orientation = np.array([-6.2695, 0.00145, -0.0068]) # roll pitch yaw
+
+rotmat = R.from_euler('xyz', car_orientation, degrees=False).as_matrix()
+# result
+# [[    0.999976     0.006824     0.001366]
+#  [   -0.006805     0.999884    -0.013595]
+#  [   -0.001459     0.013585     0.999907]]
+
+# world_to_ego_transform는 다음과 같이 생성된다. 
+# world 에서 ego를 바라보는 matrix
+world_to_ego_transform =
+[[    0.999976     0.006824     0.001366  1096.405   ]
+ [   -0.006805     0.999884    -0.013595 -1490.759   ]
+ [   -0.001459     0.013585     0.999907   -19.48306 ]
+ [    0.           0.           0.           1.      ]]
+```
+
+## 2. ego_to_sensor_fransform
+
+차량 좌표계에서의 센서 위치와 자세 정보를 통해 위 방법과 마찬가지로 생성하면 된다.
+
+```python
+ego_to_sensor_fransform = 
+[[-0.000524  0.999197  0.040069  0.9744  ]
+ [-0.999995 -0.000397 -0.003167 -0.0004  ]
+ [-0.003149 -0.040071  0.999192  1.5458  ]
+ [ 0.        0.        0.        1.      ]]
+```
+
+## 3. world_to_sensor_transform
+```python
+world_to_sensor_transform = world_to_ego_transform @ ego_to_sensor_transform  # world -> ego -> sensor @ 행렬곱
+```
+
+## 4. 센서 데이터 frame : sensor -> world 변환 좌표 생성
+```python
+sensor_to_object_rot = R.from_euler('xyz', np.array([0.01787, 0.0410, -1.5432]), degrees=False).as_matrix()
+# result
+# [[ 0.027508  0.999481 -0.016738]
+#  [-0.998778  0.026793 -0.04154 ]
+#  [-0.04107   0.01786   0.998997]]
+
+world_to_object_rot = world_to_sensor_transform[:3, :3] @ sensor_to_object_rot
+# result
+# [[-0.999797  0.02016  -0.00001 ] 
+#  [-0.020161 -0.999797  0.000005] 
+#  [-0.000009  0.000005  1.      ]]
+
+world_to_object_center = world_to_sensor_transform @ np.array([4.333, 20.601, -0.122, 1]).reshape(4, 1)
+# result
+# [[ 1117.927351]
+#  [-1495.254273]
+#  [  -18.988776]
+#  [    1.      ]]
+
+quaternion = R.from_matrix(world_to_object_rot).as_quat()
+# result
+# [0.9999491878987111, -0.010080753474056015, -4.788040139440564e-06, 2.6792111395693882e-06] x y z w
+```
+
+## 변환 결과 (frame : sensor -> world)  
+맵 상에서의 BBox의 위치와 자세를 나타낸다.
+
+xyz : [1117.927351, -1495.254273, -18.988776]  
+quaternion : [0.9999491878987111, -0.010080753474056015, -4.788040139440564e-06, 2.6792111395693882e-06]
+
+
