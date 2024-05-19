@@ -1,5 +1,5 @@
 ---
-layout: post can
+layout: post
 title:  "socketcan 사용법"
 date:   2024-05-18 21:03:36 +0530
 categories: ROS ROS2 CAN
