@@ -1,7 +1,7 @@
 ---
 layout: post can
 title:  "socketcan 사용법"
-date:   2024-05-19 21:03:36 +0530
+date:   2024-05-18 21:03:36 +0530
 categories: ROS ROS2 CAN
 ---
 자율주행 대회에서 CAN 개발을 맡게 되었다.
